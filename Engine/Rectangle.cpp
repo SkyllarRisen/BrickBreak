@@ -1,8 +1,8 @@
-#include "Rectangle.h"
+#include "Rect.h"
 #include "Vectors.h"
 #include <algorithm>
 
-Rectangle::Rectangle(const double left, const double right, const double top, const double bottom)
+RectD::RectD(const double left, const double right, const double top, const double bottom)
     :
     m_left(left),
     m_right(right),
@@ -12,39 +12,39 @@ Rectangle::Rectangle(const double left, const double right, const double top, co
     Organize();
 }
 
-Rectangle::Rectangle(const Vec2D& topLeft, const Vec2D& bottomRight)
+RectD::RectD(const Vec2D& topLeft, const Vec2D& bottomRight)
     :
-    Rectangle(topLeft[0], bottomRight[0], topLeft[1], bottomRight[1])
+    RectD(topLeft[0], bottomRight[0], topLeft[1], bottomRight[1])
 {
 }
 
-Rectangle::Rectangle(const Vec2D& topLeft, const double width, const double height)
+RectD::RectD(const Vec2D& topLeft, const double width, const double height)
     :
-    Rectangle(topLeft, topLeft + Vec2D(width, height))
+    RectD(topLeft, topLeft + Vec2D(width, height))
 {
 }
 
-double Rectangle::Left() const
+double RectD::Left() const
 {
     return m_left;
 }
 
-double Rectangle::Right() const
+double RectD::Right() const
 {
     return m_right;
 }
 
-double Rectangle::Top() const
+double RectD::Top() const
 {
     return m_top;
 }
 
-double Rectangle::Bottom() const
+double RectD::Bottom() const
 {
     return m_bottom;
 }
 
-void Rectangle::Organize()
+void RectD::Organize()
 {
     if (m_left > m_right)
         std::swap(m_left, m_right);
@@ -52,7 +52,7 @@ void Rectangle::Organize()
         std::swap(m_top, m_bottom);
 }
 
-bool Rectangle::isOverlapping(const Rectangle& rect) const
+bool RectD::isOverlapping(const RectD& rect) const
 {
     return m_right > rect.Left() && m_left < rect.Right()
         && m_bottom > rect.Top() && m_top < rect.Bottom();
