@@ -16,6 +16,7 @@ public:
     double Bottom() const;
 
     bool isOverlapping(const RectD& rect) const;
+    bool isWithin(const Vec2D& pos) const;
 
 private:
 

@@ -24,7 +24,8 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ),
+	gameBoard(gfx,RectD(Graphics::ScreenWidth / 2 - 1000 / 2 - 1, Graphics::ScreenWidth / 2 + 1000 / 2 - 1,0,1079),10)
 {
 }
 
@@ -49,4 +50,5 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+	gameBoard.Draw();
 }
