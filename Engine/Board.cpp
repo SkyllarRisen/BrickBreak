@@ -30,6 +30,10 @@ void Board::Draw() const
     }
 }
 
+void Board::Draw(const Vec2D& pos, double r, Color c) const
+{
+}
+
 const RectD& Board::PlayZone() const
 {
     return playZone;
