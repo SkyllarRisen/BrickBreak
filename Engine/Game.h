@@ -24,6 +24,8 @@
 #include "Mouse.h"
 #include "Graphics.h"
 #include "Board.h"
+#include "Ball.h"
+#include "Brick.h"
 
 class Game
 {
@@ -45,6 +47,8 @@ private:
 	/********************************/
 	/*  User Variables              */
 	const Board gameBoard;
+	Ball mainBall;
+	Brick brickField;
 	bool abortGame = false;
 	/********************************/
 };

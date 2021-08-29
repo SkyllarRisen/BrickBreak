@@ -25,7 +25,9 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	gameBoard(gfx,RectD(Graphics::ScreenWidth / 2 - 1000 / 2 - 1, Graphics::ScreenWidth / 2 + 1000 / 2 - 1,0,1079),10)
+	gameBoard(gfx,RectD(Graphics::ScreenWidth / 2 - 1000 / 2 - 1, Graphics::ScreenWidth / 2 + 1000 / 2 - 1,0,1079),10),
+	mainBall(gameBoard, 10, Vec2D(100,100), Vec2D(1, 1), Colors::Green),
+	brickField(gameBoard, RectD( Vec2D( 5, 30 ), 90, 30), Colors::Blue)
 {
 }
 
@@ -51,4 +53,7 @@ void Game::UpdateModel()
 void Game::ComposeFrame()
 {
 	gameBoard.Draw();
+	mainBall.Draw();
+	brickField.Draw();
+	
 }

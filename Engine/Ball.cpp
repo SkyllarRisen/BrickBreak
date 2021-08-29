@@ -15,5 +15,5 @@ Ball::Ball(const Board& board, const double r, const Vec2D& pos, const Vec2D& ve
 
 void Ball::Draw() const
 {
-    m_board.Draw(Pos().Get2D(),m_r,m_c);
+    m_board.DrawBall(Pos().Get2D(),m_r,m_c);
 }
