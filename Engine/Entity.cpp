@@ -62,17 +62,17 @@ void Entity::Move(const Vec3D& xyz)
     m_pos += xyz;
 }
 
-void Entity::changeVel(const double x, const double y, const double z)
+void Entity::ChangeVel(const double x, const double y, const double z)
 {
     m_vel += Vec3D(x, y, z);
 }
 
-void Entity::changeVel(const Vec2D& xy, const double z)
+void Entity::ChangeVel(const Vec2D& xy, const double z)
 {
     m_vel += Vec3D(xy, z);
 }
 
-void Entity::changeVel(const Vec3D& xyz)
+void Entity::ChangeVel(const Vec3D& xyz)
 {
     m_vel += xyz;
 }

@@ -11,9 +11,9 @@ public:
     Ball() = default;
     Ball(const Board& board, const double r, const Vec2D& pos, const Vec2D& vel, const Color c);
     void Draw() const;
+    void Update(const double dt);
 
 private:
-
     const Board& m_board;
     double m_r;
     Color m_c;

@@ -24,9 +24,9 @@ protected:
     void Move(const double x, const double y, const double z);
     void Move(const Vec2D& xy, const double z = 0);
     void Move(const Vec3D& xyz);
-    void changeVel(const double x, const double y, const double z);
-    void changeVel(const Vec2D& xy, const double z = 0);
-    void changeVel(const Vec3D& xyz);
+    void ChangeVel(const double x, const double y, const double z);
+    void ChangeVel(const Vec2D& xy, const double z = 0);
+    void ChangeVel(const Vec3D& xyz);
 
     static unsigned int numberOfEntities;
 

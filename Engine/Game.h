@@ -26,6 +26,7 @@
 #include "Board.h"
 #include "Ball.h"
 #include "Brick.h"
+#include "FrameTimer.h"
 
 class Game
 {
@@ -47,6 +48,7 @@ private:
 	/********************************/
 	/*  User Variables              */
 	const Board gameBoard;
+	FrameTimer ft;
 	Ball mainBall;
 	Brick brickField;
 	bool abortGame = false;

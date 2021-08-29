@@ -26,7 +26,7 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd ),
 	gameBoard(gfx,RectD(Graphics::ScreenWidth / 2 - 1000 / 2 - 1, Graphics::ScreenWidth / 2 + 1000 / 2 - 1,0,1079),10),
-	mainBall(gameBoard, 10, Vec2D(100,100), Vec2D(1, 1), Colors::Green),
+	mainBall(gameBoard, 10, Vec2D(100,100), Vec2D(100, 100), Colors::Green),
 	brickField(gameBoard, RectD( Vec2D( 5, 30 ), 90, 30), Colors::Blue)
 {
 }
@@ -48,6 +48,9 @@ void Game::UpdateModel()
 {
 	if (wnd.kbd.KeyIsPressed(VK_ESCAPE))
 		abortGame = true;
+	const double dt = ft.Mark();
+	mainBall.Update(dt);
+
 }
 
 void Game::ComposeFrame()
