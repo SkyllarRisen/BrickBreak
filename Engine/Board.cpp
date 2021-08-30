@@ -52,10 +52,51 @@ void Board::DrawBrick(const RectD& brick, const Color c) const
     {
         for (int y = int(tmp.Top()); y <= int(tmp.Bottom()); ++y)
         {
-            if (x > tmp.Left()+1 && x < tmp.Right()-1 && y > tmp.Top()+1 && y < tmp.Bottom()-1)
+
+            if (x > tmp.Left() + 1 && x < tmp.Right() - 1 && y > tmp.Top() + 1 && y < tmp.Bottom() - 1)
+            {
                 gfx.PutPixel(x, y, c);
-            else
-                gfx.PutPixel(x, y, Colors::Gray);
+                double width = tmp.Right() - tmp.Left() - 2;
+                double height = tmp.Bottom() - tmp.Top() - 2;
+                double mX = tmp.GetCenter()[0];
+                double mY = tmp.GetCenter()[1];
+                if (y <= mY && x > tmp.Left() + 1 + height / 2 + y - mY && x < tmp.Right() - 1 - height / 2 + mY - y)
+                {
+                    const double tmpFac = 0.93;
+                    int r = int(double(c.GetR()) * tmpFac);
+                    int g = int(double(c.GetG()) * tmpFac);
+                    int b = int(double(c.GetB()) * tmpFac);
+                    gfx.PutPixel(x, y, r, g, b);
+                }
+                else if (y > mY && x > tmp.Left() + 1 + height / 2 + mY - y && x < tmp.Right() - 1 - height / 2 + y - mY)
+                {
+                    const double tmpFac = 0.8;
+                    int r = int(double(c.GetR()) * tmpFac);
+                    int g = int(double(c.GetG()) * tmpFac);
+                    int b = int(double(c.GetB()) * tmpFac);
+                    gfx.PutPixel(x, y, r, g, b);
+                }
+                else if (x <= mX)
+                {
+                    const double tmpFac = 1;
+                    int r = int(double(c.GetR()) * tmpFac);
+                    int g = int(double(c.GetG()) * tmpFac);
+                    int b = int(double(c.GetB()) * tmpFac);
+                    gfx.PutPixel(x, y, r, g, b);
+                }
+                else
+                {
+                    const double tmpFac = 0.65;
+                    int r = int(double(c.GetR()) * tmpFac);
+                    int g = int(double(c.GetG()) * tmpFac);
+                    int b = int(double(c.GetB()) * tmpFac);
+                    gfx.PutPixel(x, y, r, g, b);
+                }
+                    
+            }
+                
+
+                
         }
     }
 }
