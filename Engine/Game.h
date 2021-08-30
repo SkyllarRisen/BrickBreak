@@ -38,7 +38,7 @@ public:
 	bool GameOver() const;
 private:
 	void ComposeFrame();
-	void UpdateModel();
+	void UpdateModel(const double dt);
 	/********************************/
 	/*  User Functions              */
 	/********************************/

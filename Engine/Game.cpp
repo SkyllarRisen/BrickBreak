@@ -64,8 +64,15 @@ Game::Game( MainWindow& wnd )
 
 void Game::Go()
 {
-	gfx.BeginFrame();	
-	UpdateModel();
+	gfx.BeginFrame();
+	double elapsedTime = ft.Mark();
+	while (elapsedTime > 0.0)
+	{
+		const double dt = std::min(0.001, elapsedTime);
+		UpdateModel(dt);
+		elapsedTime -= dt;
+	}
+	
 	ComposeFrame();
 	gfx.EndFrame();
 }
@@ -75,11 +82,11 @@ bool Game::GameOver() const
 	return abortGame;
 }
 
-void Game::UpdateModel()
+void Game::UpdateModel(const double dt)
 {
 	if (wnd.kbd.KeyIsPressed(VK_ESCAPE))
 		abortGame = true;
-	const double dt = ft.Mark();
+
 	int index = 0;
 	double distance = 1000000000;
 
