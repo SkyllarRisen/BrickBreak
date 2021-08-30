@@ -26,7 +26,6 @@ bool Ball::Update(const double dt)
     {
         Move(Vec2D(Vel()[0] * dt,0));
         ChangeVel(Vec2D(-2 * Vel()[0], 0));
-        m_paddleCooldown = false;
     }
     if (tmpPos[1] - m_r < 0)
     {
