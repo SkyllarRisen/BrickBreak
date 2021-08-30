@@ -13,6 +13,7 @@ public:
     void Draw() const;
     void DrawBall(const Vec2D& pos, const double r, const Color c) const;
     void DrawBrick(const RectD& brick, const Color c) const;
+    void DrawPaddle(const RectD& paddle, const Color c) const;
     const RectD& PlayZone() const;
 
 private:

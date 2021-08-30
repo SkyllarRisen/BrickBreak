@@ -27,6 +27,7 @@
 #include "Ball.h"
 #include "Brick.h"
 #include "FrameTimer.h"
+#include "Paddle.h"
 
 class Game
 {
@@ -56,6 +57,7 @@ private:
 	FrameTimer ft;
 	Ball mainBall;
 	std::vector<Brick> brickField;
+	Paddle userPaddle;
 	bool abortGame = false;
 	/********************************/
 };

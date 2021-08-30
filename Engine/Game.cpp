@@ -27,7 +27,8 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd ),
 	gameBoard(gfx,RectD(Vec2D(Graphics::ScreenWidth / 2 - (brickWidth*bricksAcross+20) / 2 - 1, 0), brickWidth * bricksAcross + 20, 1079),10),
-	mainBall(gameBoard, 10, Vec2D(200,200), Vec2D(400, 400), Colors::Yellow)
+	mainBall(gameBoard, 10, Vec2D(200,200), Vec2D(400, 400), Colors::Yellow),
+	userPaddle(gameBoard, RectD( Vec2D( gameBoard.PlayZone().GetCenter()[0]-60, gameBoard.PlayZone().Bottom() - 130), Vec2D( gameBoard.PlayZone().GetCenter()[0] + 60, gameBoard.PlayZone().Bottom() - 100) ), 500, Colors::White)
 {
 	for (int i = 0; i < bricksAcross; ++i)
 	{
@@ -90,6 +91,8 @@ void Game::UpdateModel(const double dt)
 	int index = 0;
 	double distance = 1000000000;
 
+	userPaddle.Update(wnd.kbd, dt);
+
 	for (int i = 0; i < brickField.size();++i)
 	{
 		if (mainBall.IsColliding(brickField.at(i), dt))
@@ -104,12 +107,17 @@ void Game::UpdateModel(const double dt)
 	}
 	if(index)
 		mainBall.Collision(brickField.at(index-1), dt);
-	mainBall.Update(dt);
+	mainBall.Collision(userPaddle, dt);
+	if (!mainBall.Update(dt))
+	{
+		abortGame = true;	
+	}
 }
 
 void Game::ComposeFrame()
 {
 	gameBoard.Draw();
+	userPaddle.Draw();
 	mainBall.Draw();
 	for (const Brick& b : brickField)
 		b.Draw();

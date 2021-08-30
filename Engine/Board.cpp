@@ -60,6 +60,21 @@ void Board::DrawBrick(const RectD& brick, const Color c) const
     }
 }
 
+void Board::DrawPaddle(const RectD& paddle, const Color c) const
+{
+    RectD tmp = RectD(Vec2D(PlayZone().Left(), PlayZone().Top()) + Vec2D(paddle.Left(), paddle.Top()), paddle.Right() - paddle.Left(), paddle.Bottom() - paddle.Top());
+    for (int x = int(tmp.Left()); x <= int(tmp.Right()); ++x)
+    {
+        for (int y = int(tmp.Top()); y <= int(tmp.Bottom()); ++y)
+        {
+            if (x > tmp.Left() + 1 && x < tmp.Right() - 1 && y > tmp.Top() + 1 && y < tmp.Bottom() - 1)
+                gfx.PutPixel(x, y, c);
+            else
+                gfx.PutPixel(x, y, Colors::Black);
+        }
+    }
+}
+
 const RectD& Board::PlayZone() const
 {
     return playZone;
