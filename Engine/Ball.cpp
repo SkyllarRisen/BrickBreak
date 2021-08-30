@@ -95,7 +95,7 @@ void Ball::Collision(const Paddle& paddle, const double dt)
                 Move(Vec2D(0, Vel()[1] * dt));
                 const double tmpSpeed = Vel().Norm();
                 ChangeVel(-Vel());
-                ChangeVel((Pos().Get2D() - paddle.GetCenter()).Normalize() * tmpSpeed);
+                ChangeVel(((Pos().Get2D() - paddle.GetCenter()).Normalize() + Vec2D(0,-0.33)).Normalize() * tmpSpeed);
             }
             else if (tmpPos[0] < paddle.GetRect().Left() && Vel()[0] > 0 || tmpPos[0] > paddle.GetRect().Right() && Vel()[0] < 0)
             {

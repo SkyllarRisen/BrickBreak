@@ -87,7 +87,16 @@ void Game::UpdateModel(const double dt)
 {
 	if (wnd.kbd.KeyIsPressed(VK_ESCAPE))
 		abortGame = true;
-
+	int brokenBrickCounter = 0;
+	for (Brick& b : brickField)
+	{
+		if (b.IsBroken())
+			++brokenBrickCounter;
+	}
+	if (brokenBrickCounter == bricksTotal)
+	{
+		abortGame = true;
+	}
 	int index = 0;
 	double distance = 1000000000;
 
