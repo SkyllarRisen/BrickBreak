@@ -15,6 +15,8 @@ public:
     double Top() const;
     double Bottom() const;
 
+    const Vec2D GetCenter() const;
+
     bool isOverlapping(const RectD& rect) const;
     bool isWithin(const Vec2D& pos) const;
 

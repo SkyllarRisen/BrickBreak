@@ -44,6 +44,11 @@ double RectD::Bottom() const
     return m_bottom;
 }
 
+const Vec2D RectD::GetCenter() const
+{
+    return Vec2D((Left() + Right()) / 2, (Top() + Bottom()) / 2);
+}
+
 void RectD::Organize()
 {
     if (m_left > m_right)

@@ -9,10 +9,13 @@
 class Brick : public Entity
 {
 public:
-
     Brick() = default;
     Brick(const Board& board,  const RectD& rect, const Color c);
-    void Draw();
+
+    void Draw() const;
+    const RectD& GetRect() const;
+    bool IsBroken() const;
+    void Break();
 
 private:
 

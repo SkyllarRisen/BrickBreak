@@ -8,6 +8,7 @@ class Board : public Entity
 {
 public:
 
+    
     Board(Graphics& gfx, const RectD& rect, const int borderWidth);
     void Draw() const;
     void DrawBall(const Vec2D& pos, const double r, const Color c) const;

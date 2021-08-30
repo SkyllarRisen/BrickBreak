@@ -47,10 +47,15 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	static constexpr double brickWidth = 100;
+	static constexpr double brickHeight = 30;
+	static constexpr double bricksAcross = 12;
+	static constexpr double bricksLayers = 4;
+	static constexpr double bricksTotal = bricksAcross * bricksLayers;
 	const Board gameBoard;
 	FrameTimer ft;
 	Ball mainBall;
-	Brick brickField;
+	std::vector<Brick> brickField;
 	bool abortGame = false;
 	/********************************/
 };

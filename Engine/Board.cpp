@@ -16,9 +16,9 @@ Board::Board(Graphics& gfx, const RectD& rect, const int borderWidth)
 
 void Board::Draw() const
 {
-    for (int x = borderZone.Left(); x <= borderZone.Right(); ++x)
+    for (int x = int(borderZone.Left()); x <= int(borderZone.Right()); ++x)
     {
-        for (int y = borderZone.Top(); y <= borderZone.Bottom(); ++y)
+        for (int y = int(borderZone.Top()); y <= int(borderZone.Bottom()); ++y)
         {
             if (!PlayZone().isWithin(Vec2D(x, y)))
                 gfx.PutPixel(x, y, Colors::White);
@@ -33,12 +33,14 @@ void Board::Draw() const
 void Board::DrawBall(const Vec2D& pos, const double r, const Color c) const
 {
     Vec2D boardPos = pos + Vec2D(PlayZone().Left(), PlayZone().Top());
-    for (int x = boardPos[0] - r; x <= boardPos[0] + r; ++x)
+    for (int x = int(boardPos[0] - r); x <= int(boardPos[0] + r); ++x)
     {
-        for (int y = boardPos[1] - r; y <= boardPos[1] + r; ++y)
+        for (int y = int(boardPos[1] - r); y <= int(boardPos[1] + r); ++y)
         {
-            if ((boardPos - Vec2D(x, y)).NormSq() <= r * r)
+            if ((boardPos - Vec2D(x, y)).NormSq() <= (r-2) * (r-2))
                 gfx.PutPixel(x, y, c);
+            else if ((boardPos - Vec2D(x, y)).NormSq() <= r * r)
+                gfx.PutPixel(x, y, Colors::Black);
         }
     }
 }
@@ -46,14 +48,14 @@ void Board::DrawBall(const Vec2D& pos, const double r, const Color c) const
 void Board::DrawBrick(const RectD& brick, const Color c) const
 {
     RectD tmp = RectD(Vec2D(PlayZone().Left(), PlayZone().Top()) + Vec2D(brick.Left(), brick.Top()), brick.Right()-brick.Left(), brick.Bottom()-brick.Top());
-    for (int x = tmp.Left(); x <= tmp.Right(); ++x)
+    for (int x = int(tmp.Left()); x <= int(tmp.Right()); ++x)
     {
-        for (int y = tmp.Top(); y <= tmp.Bottom(); ++y)
+        for (int y = int(tmp.Top()); y <= int(tmp.Bottom()); ++y)
         {
             if (x > tmp.Left()+1 && x < tmp.Right()-1 && y > tmp.Top()+1 && y < tmp.Bottom()-1)
                 gfx.PutPixel(x, y, c);
             else
-                gfx.PutPixel(x, y, Colors::Black);
+                gfx.PutPixel(x, y, Colors::Gray);
         }
     }
 }

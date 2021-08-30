@@ -20,15 +20,46 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
+#include "Colors.h"
 
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	gameBoard(gfx,RectD(Graphics::ScreenWidth / 2 - 1000 / 2 - 1, Graphics::ScreenWidth / 2 + 1000 / 2 - 1,0,1079),10),
-	mainBall(gameBoard, 10, Vec2D(100,100), Vec2D(100, 100), Colors::Green),
-	brickField(gameBoard, RectD( Vec2D( 5, 30 ), 90, 30), Colors::Blue)
+	gameBoard(gfx,RectD(Vec2D(Graphics::ScreenWidth / 2 - (brickWidth*bricksAcross+20) / 2 - 1, 0), brickWidth * bricksAcross + 20, 1079),10),
+	mainBall(gameBoard, 10, Vec2D(200,200), Vec2D(400, 400), Colors::Yellow)
 {
+	for (int i = 0; i < bricksAcross; ++i)
+	{
+		for (int j = 0; j < bricksLayers; ++j)
+		{
+			Color tmpColor;
+			switch (i%6)
+			{
+			case 0:
+				tmpColor = Colors::Blue;
+				break;
+			case 1:
+				tmpColor = Colors::Green;
+				break;
+			case 2:
+				tmpColor = Colors::Red;
+				break;
+			case 3:
+				tmpColor = Colors::Yellow;
+				break;
+			case 4:
+				tmpColor = Colors::Cyan;
+				break;
+			case 5:
+				tmpColor = Colors::Magenta; 
+				break;
+			default:
+				tmpColor = Colors::White;
+			}
+			brickField.push_back(Brick(gameBoard, RectD(Vec2D(0,30) + Vec2D(i* brickWidth,j*brickHeight), brickWidth, brickHeight), tmpColor));
+		}
+	}
 }
 
 void Game::Go()
@@ -49,14 +80,31 @@ void Game::UpdateModel()
 	if (wnd.kbd.KeyIsPressed(VK_ESCAPE))
 		abortGame = true;
 	const double dt = ft.Mark();
-	mainBall.Update(dt);
+	int index = 0;
+	double distance = 1000000000;
 
+	for (int i = 0; i < brickField.size();++i)
+	{
+		if (mainBall.IsColliding(brickField.at(i), dt))
+		{
+			double newDist = (brickField.at(i).GetRect().GetCenter()-(mainBall.Pos()+mainBall.Vel()*dt).Get2D()).NormSq();
+			if (newDist < distance)
+			{
+				distance = newDist;
+				index = i+1;
+			}
+		}
+	}
+	if(index)
+		mainBall.Collision(brickField.at(index-1), dt);
+	mainBall.Update(dt);
 }
 
 void Game::ComposeFrame()
 {
 	gameBoard.Draw();
 	mainBall.Draw();
-	brickField.Draw();
+	for (const Brick& b : brickField)
+		b.Draw();
 	
 }
